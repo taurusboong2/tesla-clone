@@ -52,6 +52,8 @@ function Home() {
 
 export default Home
 
+
+/* StyledComponents down below */
 const Container = styled.div`
   height: 100vh;
 `
