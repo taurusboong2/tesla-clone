@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { selectCars } from '../features/car/carSlice';
+import { useSelector } from 'react-redux';
+import { SleddingTwoTone } from '@mui/icons-material';
 
 function Header() {
   const [BurgerStatus, setBurgerStatus] = useState(false);
+  const cars = useSelector(selectCars);
 
   return (
     <Container>
@@ -12,10 +16,10 @@ function Header() {
       <img src="/images\logo.svg" alt="logo" />
       </a>
       <Menu>
-        <p><a href="#">Model S</a></p>
-        <p><a href="#">Model 3</a></p>
-        <p><a href="#">Model X</a></p>
-        <p><a href="#">Model Y</a></p>
+        { cars && cars.map((car, index) => (
+          <p  key={ index }><a href="#">{ car }</a></p>
+        ))}
+
       </Menu>
       <RightMenu>
         <a href="#">Shop</a>
@@ -30,6 +34,11 @@ function Header() {
             onClick={() => {setBurgerStatus(false)}}
           />
         </CloseWrapper>
+        {
+          cars && cars.map((car, index) => (
+            <li  key={ index }><a href="#">{ car }</a></li>
+          ))
+        }
         <li><a href="#">Existing Inventory</a></li>
         <li><a href="#">Used Inventory</a></li>
         <li><a href="#">Trade-in</a></li>
